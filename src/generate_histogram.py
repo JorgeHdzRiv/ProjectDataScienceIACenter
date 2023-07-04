@@ -1,6 +1,7 @@
 # src/generate_figures.py
 import pandas as pd
 import matplotlib.pyplot as plt
+import helpers.DataLoader as Dtl
 
 
 def plot_histogram(df, column, output_path):
@@ -15,10 +16,14 @@ def plot_histogram(df, column, output_path):
 
 
 def main():
-    df = pd.read_csv("./data/processed/RH_procesado.csv")
+    path = "./data/processed/RH_procesado.csv"
+    reader = Dtl.DataLoader(path)
+    df = reader.load_data()
+    
+    # print(df.head()) ## Para comprobar que funciona imprimimos en pantalla (opcional)
 
     # Asegúrate de que los datos estén correctamente procesados antes de intentar trazarlos
-    plot_histogram(df, "Desercion", "./reports/figures/histograma_desercion.png")
+    plot_histogram(df, "Desercion", "./reports/figures/histograma_desercion_POO.png")
 
 
 if __name__ == "__main__":
